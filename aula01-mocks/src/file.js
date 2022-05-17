@@ -48,14 +48,14 @@ class File {
 
   static parseCSVToJSON(stringCsv) {
     const lines = stringCsv.split("\n");
-    const firstLine = lines.shift();
-    const header = firstLine.split(",");
+    const firstLine = lines.shift(); // "id, name, profession, age"
+    const header = firstLine.split(","); // ["id", "name", "profession", "age"]
 
     const users = lines.map((line) => {
-      const colums = line.split(",");
+      const colums = line.split(","); // ex: [123, "Alessandro", "Developer", 26]
       let user = {};
       for (const index in colums) {
-        user[header[index]] = colums[index];
+        user[header[index]] = colums[index]; // ex: {id: 123, name: "Alessandro", age: 26}
       }
 
       return new User(user);
