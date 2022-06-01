@@ -1,4 +1,4 @@
-export class Person {
+"use strict";module.export({Person:()=>Person});class Person {
   constructor({ id, vehicles, kmTraveled, from, to }) {
     this.id = id;
     this.vehicles = vehicles;
