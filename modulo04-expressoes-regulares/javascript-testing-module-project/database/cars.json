@@ -1,0 +1,23 @@
+[
+  {
+    "id": "06a1e040-e8e6-4c12-98ca-8f76fa111a6b",
+    "name": "1",
+    "releaseYear": 2021,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "8b7051d4-ec09-4cdf-b0ec-b365883299d7",
+    "name": "Taurus",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "913f55a5-a0ff-4bab-98b8-bbb0379eb9d8",
+    "name": "Focus",
+    "releaseYear": 2021,
+    "available": true,
+    "gasAvailable": true
+  }
+]
