@@ -1,3 +1,5 @@
+const { evaluateRegex } = require("./util");
+
 // O objetivo do FluentAPI é executar tarefas
 // como um pipeline, step by step e no fim,
 // chama o build. Muito similar ao pattern Builder.
@@ -9,7 +11,7 @@ class TextProcessorFluentAPI {
     this.#content = content;
   }
 
-  extractPeapleData() {
+  extractPeopleData() {
     // ?<= é um padrão que vai dar match em tudo que for afrente do grupo
     // [contratante|contratada] ou um ou outro, e tem a flag "i" que é para ficar case insensitive
     // :\s{1} vai procurar o caracter literal do dois pontos seguindo de 1 espaço
@@ -19,11 +21,27 @@ class TextProcessorFluentAPI {
     // .*\n vai buscar tudo até o primeiro \n
     // .*? non greety, nesse ? faz com que ele pare na primeira recorrencia, assim ele evita ficar em loop
 
-    const matchPattern =
-      /(?<=[contratante|contratada]:\s{1})(?!\s)(.*\n.*?)$/gim;
+    const matchPattern = evaluateRegex(
+      /(?<=[contratante|contratada]:\s{1})(?!\s)(.*\n.*?)$/gim
+    );
 
-    const peapleMatch = this.#content.match(matchPattern);
-    this.#content = peapleMatch;
+    const peopleMatch = this.#content.match(matchPattern);
+    this.#content = peopleMatch;
+    return this;
+  }
+
+  divideTextInColumns() {
+    const pattern = evaluateRegex(/,/);
+    this.#content = this.#content.map((line) => line.split(pattern));
+    return this;
+  }
+
+  removeUnecessarySpaces() {
+    const pattern = /^\s+|\s+$|\n/g;
+    this.#content = this.#content.map((item) =>
+      item.map((line) => line.replace(pattern, ""))
+    );
+
     return this;
   }
 

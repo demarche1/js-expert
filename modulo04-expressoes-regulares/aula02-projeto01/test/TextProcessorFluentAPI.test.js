@@ -7,13 +7,11 @@ describe("TextProcessorFluentAPI", () => {
   it("#Build", () => {
     const result = new TextProcessorFluentAPI(mock).build();
 
-    expect(result).to.be.a("string");
-    expect(result).to.have.lengthOf(mock.length);
     expect(result).to.deep.equal(mock);
   });
 
-  it("#extractPeapleData", () => {
-    const result = new TextProcessorFluentAPI(mock).extractPeapleData().build();
+  it("#extractPeopleData", () => {
+    const result = new TextProcessorFluentAPI(mock).extractPeopleData().build();
 
     const expected = [
       [
@@ -30,8 +28,68 @@ describe("TextProcessorFluentAPI", () => {
       ].join("\n"),
     ];
 
-    expect(result).to.be.a("array");
-    expect(result).to.have.lengthOf(expected.length);
+    expect(result).to.deep.equal(expected);
+  });
+
+  it("#divideTextInColumns", () => {
+    const mock = [
+      [
+        "Xuxa da Silva, brasileira, casada, CPF 235.743.420-12, residente e ",
+        "domiciliada a Rua dos bobos, zero, bairro Alphaville, São Paulo. ",
+      ].join("\n"),
+    ];
+
+    const expected = [
+      [
+        "Xuxa da Silva",
+        " brasileira",
+        " casada",
+        " CPF 235.743.420-12",
+        " residente e \ndomiciliada a Rua dos bobos",
+        " zero",
+        " bairro Alphaville",
+        " São Paulo. ",
+      ],
+    ];
+
+    const result = new TextProcessorFluentAPI(mock)
+      .divideTextInColumns()
+      .build();
+
+    expect(result).to.deep.equal(expected);
+  });
+
+  it("#removeUnecessarySpaces", () => {
+    const mock = [
+      [
+        "Xuxa da Silva",
+        " brasileira",
+        " casada",
+        " CPF 235.743.420-12",
+        " residente e \ndomiciliada a Rua dos bobos",
+        " zero",
+        " bairro Alphaville",
+        " São Paulo. ",
+      ],
+    ];
+
+    const expected = [
+      [
+        "Xuxa da Silva",
+        "brasileira",
+        "casada",
+        "CPF 235.743.420-12",
+        "residente e domiciliada a Rua dos bobos",
+        "zero",
+        "bairro Alphaville",
+        "São Paulo.",
+      ],
+    ];
+
+    const result = new TextProcessorFluentAPI(mock)
+      .removeUnecessarySpaces()
+      .build();
+
     expect(result).to.deep.equal(expected);
   });
 });
