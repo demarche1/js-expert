@@ -16,6 +16,9 @@
   },
   "homepage": "https://github.com/demarche1/js-expert#readme",
   "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
     "sinon": "^9.2.4"
   }
 }

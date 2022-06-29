@@ -1,4 +1,4 @@
-const { expect } = require("chai");
+const { expect, assert } = require("chai");
 const { describe, it } = require("mocha");
 const TextProcessorFluentAPI = require("../src/TextProcessorFluentAPI");
 const mock = require("./mock/valid");
@@ -91,5 +91,37 @@ describe("TextProcessorFluentAPI", () => {
       .build();
 
     expect(result).to.deep.equal(expected);
+  });
+
+  it("#mapPerson", () => {
+    const mock = [
+      [
+        "Xuxa da Silva",
+        "brasileira",
+        "casada",
+        "CPF 235.743.420-12",
+        "residente e domiciliada a Rua dos bobos",
+        "zero",
+        "bairro Alphaville",
+        "São Paulo.",
+      ],
+    ];
+
+    const result = new TextProcessorFluentAPI(mock).mapPerson().build();
+
+    const expected = [
+      {
+        nome: "Xuxa da Silva",
+        nacionalidade: "Brasileira",
+        estadoCivil: "Casada",
+        cpf: "23574342012",
+        rua: "Rua dos bobos",
+        numero: "zero",
+        bairro: "Alphaville",
+        cidade: "São Paulo",
+      },
+    ];
+
+    expect(result).to.be.deep.equal(expected);
   });
 });

@@ -1,3 +1,4 @@
+const Person = require("./Person");
 const { evaluateRegex } = require("./util");
 
 // O objetivo do FluentAPI é executar tarefas
@@ -37,11 +38,16 @@ class TextProcessorFluentAPI {
   }
 
   removeUnecessarySpaces() {
-    const pattern = /^\s+|\s+$|\n/g;
+    const pattern = evaluateRegex(/^\s+|\s+$|\n/g);
     this.#content = this.#content.map((item) =>
       item.map((line) => line.replace(pattern, ""))
     );
 
+    return this;
+  }
+
+  mapPerson() {
+    this.#content = this.#content.map((line) => new Person(line));
     return this;
   }
 

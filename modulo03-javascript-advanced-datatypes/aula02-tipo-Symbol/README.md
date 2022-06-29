@@ -1,0 +1,4 @@
+# Referências:
+
+- https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/
+- https://blog.risingstack.com/async-iterators-in-no...​
