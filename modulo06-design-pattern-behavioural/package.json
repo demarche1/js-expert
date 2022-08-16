@@ -1,0 +1,19 @@
+{
+  "name": "modulo06-design-pattern-behavioural",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^2.2.0",
+    "mongodb": "^4.8.1",
+    "nodemon": "^2.0.19",
+    "pg": "^8.7.3"
+  }
+}
