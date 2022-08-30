@@ -1,4 +1,3 @@
-// curl -i localhost:3000
 import Http from 'http'
 
 export function InjectHttpInterceptor() {
