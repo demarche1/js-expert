@@ -1,7 +1,7 @@
 
 
 import { Readable, Writable, Transform } from 'stream';
-import { writeFileSync } from 'fs'
+import { createWriteStream } from 'fs'
 
 // readable é sempre a entrada dos dados
 const readable = new Readable({
@@ -23,23 +23,38 @@ const transformMap = new Transform({
     transform(chunk, encoding, cb) {
         const data = JSON.parse(chunk)
 
-        const result = `${data.id}, ${data.name.toUpperCase()}`
+        const result = `${data.id}, ${data.name.toUpperCase()}\n`
 
         cb(null, result)
     }
 })
 
+const mapHeader = new Transform({
+    transform(chunk, encoding, cb) {
+        this.counter = this.counter ?? 0
 
-// writable é sempre a saida dos dados.
-const writable = new Writable({
-    write(chunk, encoding, cb) {
-        writeFileSync('output.txt', chunk.toString(), {
-            flag: 'a'
-        })
-        cb()
+        if(this.counter) {
+            return cb(null, chunk)
+        }
+
+        this.counter++
+
+        cb(null, "id, name\n".concat(chunk))
     }
 })
 
+
+// writable é sempre a saida dos dados.
+// const writable = new Writable({
+//     write(chunk, encoding, cb) {
+//         writeFileSync('output.txt', chunk.toString(), {
+//             flag: 'a'
+//         })
+//         cb()
+//     }
+// })
+
 readable
     .pipe(transformMap)
-    .pipe(writable)
+    .pipe(mapHeader)
+    .pipe(createWriteStream('output.txt'))
