@@ -1,0 +1,17 @@
+{
+  "name": "aula02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webApi.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mkdir -p logs && node webApi.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
